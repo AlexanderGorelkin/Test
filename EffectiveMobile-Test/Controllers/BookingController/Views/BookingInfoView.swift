@@ -92,7 +92,6 @@ final class BookingInfoView: UIView {
     func setup() {
         layer.cornerRadius = 12
         backgroundColor = .white
-        print("setup")
         addView(infoStackView)
         NSLayoutConstraint.activate([
             infoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 16),

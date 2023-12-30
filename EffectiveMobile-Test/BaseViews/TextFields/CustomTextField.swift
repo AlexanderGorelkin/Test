@@ -22,10 +22,7 @@ public class CustomTextField: UITextField {
     }
     
     
-    func startEditing() {
-        guard let placeholderText = placeholder else { return }
-        
-    }
+    
     
     
     required init?(coder: NSCoder) {

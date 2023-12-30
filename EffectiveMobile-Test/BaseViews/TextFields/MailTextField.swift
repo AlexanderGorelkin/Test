@@ -8,15 +8,17 @@
 import UIKit
 
 
-final class MailTextField: CustomTextField {
+final class MailTextField: UITextField {
     
     let defaultColor = R.Colors.Default.background
     var status: Bool = false
     
-    override init() {
-        super.init()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = defaultColor
+        layer.cornerRadius = 10
+        borderStyle = .roundedRect
         delegate = self
-        keyboardType = .emailAddress
     }
     
     required init?(coder: NSCoder) {

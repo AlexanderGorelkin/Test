@@ -14,7 +14,7 @@ final class PeculiaritiesViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
         label.text = "Hello"
-        label.textColor = R.Colors.NonActiveColor.bottomLabelColor
+        label.textColor = R.Colors.Default.subtitleText
         return label
     }()
     

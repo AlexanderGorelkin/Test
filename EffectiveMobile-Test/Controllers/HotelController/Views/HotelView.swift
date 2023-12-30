@@ -46,7 +46,7 @@ final class HotelView: UIView {
             ratingView.leftAnchor.constraint(equalTo: leftAnchor),
             ratingView.rightAnchor.constraint(equalTo: rightAnchor),
             
-            priceView.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 16),
+            priceView.topAnchor.constraint(equalTo: ratingView.bottomAnchor),
             priceView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
             priceView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
         

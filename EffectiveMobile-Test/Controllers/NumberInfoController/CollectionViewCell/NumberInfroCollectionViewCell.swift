@@ -9,6 +9,9 @@ import UIKit
 
 final class NumberInfroCollectionViewCell: UICollectionViewCell {
     
+    let defaultWidth = UIScreen.main.bounds.width - 16 - 16
+    
+    
     weak var navigationController: UINavigationController?
     static let identifier = String(describing: NumberInfroCollectionViewCell.self)
     
@@ -44,6 +47,7 @@ final class NumberInfroCollectionViewCell: UICollectionViewCell {
         backgroundColor = .white
     }
     func setup() {
+        
         guard let photoCollection = photoCollection,
               let priceView = priceView,
               let peculiaritiesView = peculiaritiesView,
@@ -61,29 +65,34 @@ final class NumberInfroCollectionViewCell: UICollectionViewCell {
             photoCollection.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             photoCollection.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
             photoCollection.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            photoCollection.widthAnchor.constraint(equalToConstant: defaultWidth),
             photoCollection.heightAnchor.constraint(equalTo: photoCollection.widthAnchor, multiplier: 0.75),
             
             nameLabel.topAnchor.constraint(equalTo: photoCollection.bottomAnchor, constant: 5),
             nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            nameLabel.widthAnchor.constraint(equalToConstant: defaultWidth),
             nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
             
-            peculiaritiesView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
+            peculiaritiesView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
             peculiaritiesView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            peculiaritiesView.widthAnchor.constraint(equalToConstant: defaultWidth),
             peculiaritiesView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
             
-            
-            
-            aboutNumber.topAnchor.constraint(equalTo: peculiaritiesView.bottomAnchor, constant: 10),
+            aboutNumber.topAnchor.constraint(equalTo: peculiaritiesView.bottomAnchor, constant: 5),
             aboutNumber.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
             
-            priceView.topAnchor.constraint(equalTo: aboutNumber.bottomAnchor, constant: 10),
+            priceView.topAnchor.constraint(equalTo: aboutNumber.bottomAnchor, constant: 5),
             priceView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
             priceView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            priceView.widthAnchor.constraint(equalToConstant: defaultWidth),
             
-            mainButton.topAnchor.constraint(equalTo: priceView.bottomAnchor, constant: 10),
+            
+            mainButton.topAnchor.constraint(equalTo: priceView.bottomAnchor, constant: 5),
             mainButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
             mainButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            mainButton.widthAnchor.constraint(equalToConstant: defaultWidth),
             mainButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            
             
         ])
     }
@@ -91,6 +100,7 @@ final class NumberInfroCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     
 }
@@ -105,7 +115,7 @@ class CustomButtom: UIButton {
         setInsets()
     }
     func setInsets() {
-        var config = UIButton.Configuration.filled()
+        var config = UIButton.Configuration.tinted()
         config.imagePlacement = .trailing
         config.imagePadding = 5
         config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 8)

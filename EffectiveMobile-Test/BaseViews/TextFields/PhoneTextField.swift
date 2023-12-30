@@ -8,29 +8,14 @@
 import UIKit
 
 
-enum TextFieldType {
-    case mail
-    case phone
-    case another
-    
-    func textField() -> UITextField {
-        switch self {
-        case .mail:
-            return PhoneTextField()
-        case .phone:
-            return PhoneTextField()
-        case .another:
-            return PhoneTextField()
-        }
-    }
-}
-
 final class PhoneTextField: UITextField {
     let defaultColor = R.Colors.Default.background
     var status: Bool = false
     
     init() {
         super.init(frame: .zero)
+        textContentType = .telephoneNumber
+        
         backgroundColor = defaultColor
         layer.cornerRadius = 10
         borderStyle = .roundedRect
@@ -44,10 +29,13 @@ final class PhoneTextField: UITextField {
     
 }
 extension PhoneTextField: UITextFieldDelegate {
+    
+    
     func format(with mask: String, phone: String) -> String {
         let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
         var index = numbers.startIndex
+        print(numbers)
         for ch in mask where index < numbers.endIndex {
             if ch == "*" {
                 result.append(numbers[index])
@@ -58,6 +46,8 @@ extension PhoneTextField: UITextFieldDelegate {
         }
         return result
     }
+    
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         guard let text = textField.text else { return }
         if text == "" {
@@ -70,6 +60,7 @@ extension PhoneTextField: UITextFieldDelegate {
         textField.text = format(with: "+* (***) ***-**-**", phone: newString)
         return false
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let text = textField.text else { return }
         if text.replacingOccurrences(of: "*", with: "").count < 18 {
@@ -82,3 +73,6 @@ extension PhoneTextField: UITextFieldDelegate {
     
 }
 
+/*
+ 
+ */

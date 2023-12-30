@@ -25,7 +25,8 @@ final class HotelController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Отель"
-        view.backgroundColor = R.Colors.Default.background
+        view.backgroundColor = .white
+        navigationController?.navigationBar.barTintColor = .white
         networkManager.fetchHotel { [weak self] result in
             guard let self = self else { return }
             switch result {

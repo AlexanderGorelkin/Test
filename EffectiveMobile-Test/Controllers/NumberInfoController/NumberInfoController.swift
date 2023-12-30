@@ -10,10 +10,12 @@ import UIKit
 final class NumberInfoController: UIViewController {
     private var roomsArray: RoomsModel? = nil
     
+    
     let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView();
     private let flowLayout: UICollectionViewFlowLayout = {
        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+//        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
         return layout
@@ -21,6 +23,7 @@ final class NumberInfoController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.delegate = self
+        
         collection.dataSource = self
         collection.register(NumberInfroCollectionViewCell.self, forCellWithReuseIdentifier: NumberInfroCollectionViewCell.identifier)
         collection.backgroundColor = R.Colors.Default.background
@@ -29,6 +32,7 @@ final class NumberInfoController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = R.Colors.Default.background
+        title = "Номера"
         startLoading()
         NetworkManager.shared.fetchNumber { [weak self] result in
             guard let self = self else { return }
@@ -86,12 +90,13 @@ extension NumberInfoController: UICollectionViewDataSource, UICollectionViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NumberInfroCollectionViewCell.identifier, for: indexPath) as! NumberInfroCollectionViewCell
             cell.navigationController = self.navigationController
             cell.configure(number: room[indexPath.row])
+            print(cell.frame)
             return cell
         }
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height * 0.66)
+        return CGSize(width: view.frame.width, height: view.frame.height * 0.63)
     }
 }

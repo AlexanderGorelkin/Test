@@ -39,7 +39,7 @@ final class PaidController: UIViewController {
     
     private lazy var bottomLabel = {
        let label = UILabel()
-        label.text = "Подтверждение заказа №104893 может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление."
+        label.text = "Подтверждение заказа №\(Int.random(in: 100000...105000)) может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление."
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.numberOfLines = 0
@@ -54,7 +54,7 @@ final class PaidController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Заказ оплачен"
+        title = "Оплачено"
         view.addView(centerLabel)
         view.addView(imageView)
         view.addView(bottomLabel)

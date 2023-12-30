@@ -22,7 +22,8 @@ final class AboutHotelView: UIView {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = "Отель VIP-класса с собственными гольф полями. Высокий уровнь сервиса. Рекомендуем для респектабельного отдыха. Отель принимает гостей от 18 лет!"
-        label.font = .systemFont(ofSize: 16, weight: .thin)
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 16, weight: .regular)
         return label
     }()
    

@@ -8,11 +8,13 @@
 import UIKit
 
 
-final class BookingController: UIViewController {
+final class BookingController: UIViewController, AddNewTouristDelegate {
+    
+    private let toursitArray: [String] = ["Первый турист", "Второй турист", "Третий турист", "Четвертый турист", "Пятый турист", ]
     
     private let bookingScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.contentSize = .init(width: UIScreen.main.bounds.width, height: 1000)
+        scrollView.contentSize = .init(width: UIScreen.main.bounds.width, height: 2000)
         scrollView.backgroundColor = R.Colors.Default.background
         return scrollView
     }()
@@ -24,10 +26,26 @@ final class BookingController: UIViewController {
     
     
     
+    // MARK:  TOURIST
+    private var touristStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    private lazy var addTouristButton = ToursitButton(type: .plusButton)
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = R.Colors.Default.background
+        title = "Бронирование"
+        view.backgroundColor = .white
+        navigationController?.navigationBar.barTintColor = .white
+        addTouristButton.addDelegate = self
+        touristStackView.addArrangedSubview(TouristView(numberOfTourist: toursitArray[0]))
         NetworkManager.shared.fetchBooking { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -35,8 +53,11 @@ final class BookingController: UIViewController {
                 self.ratingView = RatingView(rating: model.horating, ratingName: model.ratingName, name: model.hotelName, adress: model.hotelAdress)
                 self.bookingInfoView = BookingInfoView(departure: model.departure, arrivalCountry: model.arrivalCountry, tourDateStart: model.tourDateStart, tourDateStop: model.tourDateStop, numberOfNights: model.numberOfNights, hotelName: model.hotelName, room: model.room, nutrition: model.nutrition)
                 self.fullPriceView = FullPriceView(tourPrice: model.tourPrice, fuelCharge: model.fuelCharge, serviceCharge: model.serviceCharge)
-                self.mainButton = MainButtonContainer(title: "Оплатить \(model.tourPrice + model.fuelCharge + model.serviceCharge)", action: UIAction(handler: { [weak self] _ in
-                    self?.navigationController?.pushViewController(PaidController(), animated: true)
+                self.mainButton = MainButtonContainer(title: "Оплатить \(Double(model.tourPrice + model.fuelCharge + model.serviceCharge).formatted())₽", action: UIAction(handler: { _ in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        self.moveOrNot()
+                    }
                 }))
                 setup()
             case .failure(let failure):
@@ -45,6 +66,41 @@ final class BookingController: UIViewController {
             }
         }
     }
+    
+    func addNewTourist() {
+        if touristStackView.subviews.count < toursitArray.count {
+            touristStackView.addArrangedSubview(TouristView(numberOfTourist: toursitArray[touristStackView.subviews.count]))
+        }
+        
+    }
+    private func moveOrNot() -> Void {
+        
+        let array = getAllTextFields(fromView : self.view)
+        for textField in array {
+            guard let text = textField.text else { return }
+            if textField.backgroundColor == R.Colors.Default.error {
+                return
+            }
+        }
+        
+        navigationController?.pushViewController(PaidController(), animated: true)
+
+    }
+    func getAllTextFields(fromView view: UIView)-> [UITextField] {
+        return view.subviews.flatMap { (view) -> [UITextField] in
+            if view is UITextField {
+                let textField = view as! UITextField
+                guard let text = textField.text else { return [(view as! UITextField)] }
+                if text.isEmpty || textField.backgroundColor == R.Colors.Default.error {
+                    textField.backgroundColor = R.Colors.Default.error
+                }
+                return [(view as! UITextField)]
+            } else {
+                return getAllTextFields(fromView: view)
+            }
+        }.compactMap({$0})
+    }
+    
     
     
     func setup() {
@@ -57,6 +113,8 @@ final class BookingController: UIViewController {
         bookingScrollView.addView(buyerInfo)
         bookingScrollView.addView(fullPriceView)
         bookingScrollView.addView(mainButton)
+        bookingScrollView.addView(addTouristButton)
+        bookingScrollView.addView(touristStackView)
         view.addView(bookingScrollView)
         
         NSLayoutConstraint.activate([
@@ -74,7 +132,13 @@ final class BookingController: UIViewController {
             buyerInfo.topAnchor.constraint(equalTo: bookingInfoView.bottomAnchor, constant: 10),
             buyerInfo.widthAnchor.constraint(equalTo: bookingScrollView.widthAnchor),
             
-            fullPriceView.topAnchor.constraint(equalTo: buyerInfo.bottomAnchor, constant: 10),
+            touristStackView.topAnchor.constraint(equalTo: buyerInfo.bottomAnchor, constant: 10),
+            touristStackView.widthAnchor.constraint(equalTo: bookingScrollView.widthAnchor),
+            
+            addTouristButton.topAnchor.constraint(equalTo: touristStackView.bottomAnchor, constant: 10),
+            addTouristButton.widthAnchor.constraint(equalTo: bookingScrollView.widthAnchor),
+            
+            fullPriceView.topAnchor.constraint(equalTo: addTouristButton.bottomAnchor, constant: 10),
             fullPriceView.widthAnchor.constraint(equalTo: bookingScrollView.widthAnchor),
             
             mainButton.topAnchor.constraint(equalTo: fullPriceView.bottomAnchor, constant: 10),

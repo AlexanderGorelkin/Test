@@ -29,9 +29,12 @@ final class PhotoCarouselView: UIView {
     }()
     
     private lazy var pageControl: UIPageControl = {
-        let pageControl = UIPageControl(frame: .init(origin: .zero, size: .init(width: 75, height: 17)))
-        pageControl.tintColor = .systemGray
+        let pageControl = UIPageControl()
+        pageControl.pageIndicatorTintColor = R.Colors.Default.subtitleText
         pageControl.currentPageIndicatorTintColor = .black
+        pageControl.backgroundColor = .white
+        pageControl.clipsToBounds = true
+        pageControl.layer.cornerRadius = 5
         return pageControl
     }()
     
@@ -70,6 +73,7 @@ final class PhotoCarouselView: UIView {
         addView(pageControl)
         pageControl.centerXAnchor.constraint(equalTo: photoCollection.centerXAnchor).isActive = true
         pageControl.bottomAnchor.constraint(equalTo: photoCollection.bottomAnchor, constant: -5).isActive = true
+        pageControl.heightAnchor.constraint(equalToConstant: 17).isActive = true
     }
     
 }

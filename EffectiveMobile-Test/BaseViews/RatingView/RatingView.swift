@@ -13,14 +13,14 @@ final class RatingView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "star.fill")
-        imageView.tintColor =  R.Colors.RatingColors.textColor
+        imageView.tintColor =  R.Colors.RatingView.textColor
         return imageView
     }()
     private lazy var ratingLabel: UILabel = {
         let label = UILabel()
         label.text = "5 Превосходно"
         label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = R.Colors.RatingColors.textColor
+        label.textColor = R.Colors.RatingView.textColor
         return label
     }()
     private lazy var starStack: UIStackView = {
@@ -32,7 +32,7 @@ final class RatingView: UIView {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.addArrangedSubview(starRatingImage)
         stackView.addArrangedSubview(ratingLabel)
-        stackView.backgroundColor = R.Colors.RatingColors.starBackground
+        stackView.backgroundColor = R.Colors.RatingView.starBackground
         stackView.layer.cornerRadius = 10
         return stackView
     }()
@@ -50,7 +50,7 @@ final class RatingView: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .light)
         label.text = "Madinat Makadi, Safaga Road, Makadi Bay, Египет"
-        label.textColor = .blue
+        label.textColor = R.Colors.RatingView.subtitleLabel
         return label
     }()
     private lazy var ratingStackView: UIStackView = {

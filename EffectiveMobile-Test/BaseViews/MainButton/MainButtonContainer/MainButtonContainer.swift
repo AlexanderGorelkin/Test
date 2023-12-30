@@ -13,7 +13,6 @@ final class MainButtonContainer: UIView {
     
     
     init(title: String, action: UIAction) {
-        print("Action added to container")
         let mainButtom = MainButton(title: title, action: action)
         super.init(frame: .zero)
         backgroundColor = .white

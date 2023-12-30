@@ -24,13 +24,13 @@ final class BuyerInfoView: UIView {
     private lazy var phoneTextField = {
         let textField = PhoneTextField()
         textField.layer.cornerRadius = 10
-        textField.placeholder = "Hello"
+        textField.placeholder = "Номер телефона"
         return textField
     }()
     private lazy var mailTextField = {
         let textField = MailTextField()
         textField.layer.cornerRadius = 10
-        textField.placeholder = "Hello"
+        textField.placeholder = "Почта"
         return textField
     }()
     
@@ -47,6 +47,7 @@ final class BuyerInfoView: UIView {
     init() {
         super.init(frame: .zero)
         backgroundColor = .white
+        layer.cornerRadius = 12
         addView(infoLabel)
         addView(phoneTextField)
         addView(mailTextField)

@@ -14,7 +14,6 @@ final class MainButton: UIButton {
     
     init(title: String, action: UIAction?) {
         super.init(frame: .zero)
-        print("Action added to button")
         
         var conf = UIButton.Configuration.filled()
         conf.cornerStyle = .large

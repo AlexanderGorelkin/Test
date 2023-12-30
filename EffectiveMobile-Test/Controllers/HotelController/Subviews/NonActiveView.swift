@@ -32,7 +32,7 @@ final class NonActiveView: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .thin)
         label.text = "Elj,c"
-        label.textColor = R.Colors.NonActiveColor.bottomLabelColor
+        label.textColor = R.Colors.Default.subtitleText
         return label
     }()
     private lazy var rightLogo: UIImageView = {
