@@ -58,7 +58,7 @@ final class HotelController: UIViewController {
             hotelScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             hotelScrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             hotelScrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            hotelScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            hotelScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             hotelView.topAnchor.constraint(equalTo: hotelScrollView.topAnchor, constant: -10),
             hotelView.widthAnchor.constraint(equalTo: hotelScrollView.widthAnchor),

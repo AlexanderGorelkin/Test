@@ -77,7 +77,6 @@ final class BookingController: UIViewController, AddNewTouristDelegate {
         
         let array = getAllTextFields(fromView : self.view)
         for textField in array {
-            guard let text = textField.text else { return }
             if textField.backgroundColor == R.Colors.Default.error {
                 return
             }
@@ -121,7 +120,7 @@ final class BookingController: UIViewController, AddNewTouristDelegate {
             bookingScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             bookingScrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             bookingScrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            bookingScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bookingScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             ratingView.topAnchor.constraint(equalTo: bookingScrollView.topAnchor),
             ratingView.widthAnchor.constraint(equalTo: bookingScrollView.widthAnchor),

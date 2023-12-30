@@ -241,8 +241,8 @@
 		1185E3082B3725EC0038FC63 /* HotelController */ = {
 			isa = PBXGroup;
 			children = (
-				11A5533D2B3AD5E3000303DD /* Subviews */,
 				116BA89F2B3781AF0014231D /* Views */,
+				11A5533D2B3AD5E3000303DD /* Subviews */,
 				1185E3062B3725940038FC63 /* HotelController.swift */,
 			);
 			path = HotelController;
